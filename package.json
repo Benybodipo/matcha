@@ -1,0 +1,27 @@
+{
+  "name": "matcha",
+  "version": "1.0.0",
+  "description": "This is a dating app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Benybodipo/matcha.git"
+  },
+  "author": "besteba",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Benybodipo/matcha/issues"
+  },
+  "homepage": "https://github.com/Benybodipo/matcha#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "mysql": "^2.16.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.6"
+  }
+}
