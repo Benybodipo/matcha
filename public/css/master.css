@@ -387,7 +387,7 @@ input[type="checkbox"]:checked + .drop-down
 =================*/
 main
 {
-	min-height: calc(100vh - 80px);
+	min-height: calc(100vh - 300px);
 }
 
 /*=================
@@ -420,6 +420,11 @@ footer ul li a
 	font-size: .8em;
 	display: block;
 	padding: 10px 5px;
+}
+
+footer ul li a:hover
+{
+	color: #F0005E !important;
 }
 
 footer p

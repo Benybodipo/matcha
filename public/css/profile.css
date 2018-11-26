@@ -43,6 +43,12 @@ td input
 	margin-right: 15px;
 	cursor: pointer;
 }
+
+#info #profile-img .star i
+{
+	color: #ffe82c;
+}
+
 #info #profile-img .img
 {
 	display: inline-block;
