@@ -13,6 +13,38 @@
 	<title>Matcha | Chat</title>
 </head>
 <body>
+	<div id="chat" class="clearfix">
+		<div id="chat-box">
+			<div id="header" class="header clearfix">
+				<div class="user-info clearfix">
+					<img src="../public/img/face5.jpg" alt=""><strong>Jessica</strong>
+				</div>
+				<div class="icons">
+					<i class="fas fa-info-circle"></i>
+					<i class="fas fa-expand-arrows-alt"></i>
+					<i class="far fa-times-circle"></i>
+				</div>
+			</div>
+			<div class="messages clearfix">
+				<div class="message clearfix me">
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, odio?</p>
+				</div>
+				<div class="message clearfix me">
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, odio?</p>
+				</div>
+				<div class="message clearfix other">
+					<p>Lorem ipsum</p>
+				</div>
+				<div class="message clearfix other">
+					<p>Lorem ipsum</p>
+				</div>
+				<hr>
+			</div>
+			<div class="text">
+				<textarea name="name" placeholder="Type your message.."></textarea>
+			</div>
+		</div>
+	</div>
 	<header>
 		<div class="container">
 			<div class="logo"><i class="fas fa-heart"></i><a href="">Matcha</a></div>
@@ -28,32 +60,12 @@
 	</header>
 	<main>
 		<div class="container">
-			<div id="chat" class="clearfix">
-				<div id="list">
-					<ul>
-						<li class="clearfix">
-							<img src="../public/img/face3.jpg" alt=""><strong>Max</strong>
-							<span>Last view: 23 Dec</span>
-						</li>
-						<li class="clearfix">
-							<img src="../public/img/face5.jpg" alt=""><strong>Jessica</strong>
-							<span>Last view: 23 Dec</span>
-						</li>
-					</ul>
-				</div>
-				<div id="chat-box">
-					<div class="messages clearfix">
-						<div class="message me">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, odio?</p>
-						</div>
-						<hr>
-						<div class="message other">
-							<p>Lorem ipsum</p>
-						</div>
-						<hr>
-					</div>
-					<input type="text" value="" placeholder="Type your message..">
-				</div>
+			<div class="menu">
+				<ul class="clearfix">
+					<li><i class="fas fa-heart"></i> Matches</li>
+					<li><i class="fas fa-star"></i> Fans</li>
+					<li><i class="far fa-eye"></i> Visitors</li>
+				</ul>
 			</div>
 		</div>
 	</main>

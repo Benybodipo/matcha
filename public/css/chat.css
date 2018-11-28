@@ -1,90 +1,165 @@
+
+main .container
+{
+	position: relative;
+	min-height: 1200px;
+}
+
+.menu
+{
+	padding: 10px 0;
+}
+
+.menu ul li
+{
+	display: inline-block;
+	font-size: 1.25em;
+	margin: 0 10px;
+}
+
+.menu ul li:hover
+{
+	cursor: pointer;
+}
+
+.menu li i
+{
+	font-size: 1.3em;
+}
+
+li .fa-heart{
+	color: #F0005E;
+}
+
+li .fa-star
+{
+	color: #ffe82c;
+}
+
+li .fa-eye
+{
+	color: #00B7FF;
+}
+
+
+/*============================
+	- CHATBOX
+============================*/
 #chat
 {
 	width: 100%;
-	max-width: 600px;
+	max-width: 500px;
 	height: 700px;
 	min-height: 700px;
-	border: 1px solid lightgray;
-	margin: 0 auto;
-	margin-top: 100px;
-	margin-bottom: 100px;
-}
+	box-shadow: 0 1px 20px lightgray;
+	background: #fff;
+	position: fixed;
+	z-index: 10000;
+	top: calc(100vh - 720px);
+	right: 0;
 
-#chat #list
-{
-	width: 40%;
-	height: 100%;
-	background: gray;
-	float: left;
-	padding: 15px;
-}
-
-#list img
-{
-	width: 15%;
-	border-radius: 50%;
-	float: left;
-	margin-right:  10px;
-}
-
-#list strong
-{
-	display: block;
-}
-
-#list span
-{
-	font-size: .7em;
-}
-
-#list ul li
-{
-	padding-top: 5px;
-	padding-bottom: 5px;
-}
-
-#list ul li strong
-{
-	font-size: 1.2em;
-	margin: 0;
-}
-#list ul li:not(:last-child)
-{
-	border-bottom: 1px solid lightgray;
 }
 
 #chat-box
 {
-	width: 60%;
 	float: right;
-	height: 100%;
-	padding: 5px 10px;
-}
-.messages
-{
-	height: 95%;
+	height: 100% !important;
 }
 
-#chat-box input
+/*============================
+	- CHATBOX HEADER
+============================*/
+#chat-box .header#header
 {
-	height: 5%;
+	background: #F0005E;
+	padding: 5px 10px;
+	margin-bottom: 15px;
+	color: #fff;
+	height: 7%;
+	width: 100%;
+}
+
+#chat-box .header .user-info
+{
+	display: inline-block;
+	min-width: 50%;
+	height: 100%;
+	float: left;
+}
+
+#chat-box .header .user-info img,
+#chat-box .header .user-info strong
+{
+	float: left;
+}
+
+#chat-box .header .user-info strong
+{
+	display: inline-block;
+	position: relative;
+	top: 5px;
+	color: #fff;
+	font-size: 1.1em;
+}
+#chat-box .header .user-info img
+{
+	float: left;
+	height: 100%;
+	width: auto;
+	border-radius: 50%;
+	margin-right: 10px;
+}
+
+#chat-box .header .icons
+{
+	float: right;
+	margin-right: 10px;
+	position: relative;
+	top: 10px;
+	color: #fff;
+}
+
+#chat-box .header .icons i
+{
+	color: #fff;
+	margin: 0 1.5px
+}
+
+#chat-box .header .icons i:hover
+{
+	cursor: pointer;
+}
+
+/*============================
+	- CHATBOX MESSAGES
+============================*/
+.messages
+{
+	height: calc(100% - 16%);
+	padding: 0 10px;
+}
+
+#chat-box textarea
+{
+	height: 100%;
 	width: 100%;
 	font-size: 1.05em;
 	padding: 5px 10px;
+	resize: none;
 }
 
 .message
 {
-	font-size: .9em;
+	font-size: .95em;
 	display: block;
-	width: 100%;
-	background: red;
+	width: 100% !important;
+	padding: 2.5px 0;
 }
 
 .message p
 {
 	display: inline-block;
-	max-width: 70%;
+	max-width: 80%;
 	background: #e4e4e4;
 	border-radius: 5px;
 	padding: 5px 10px;
@@ -99,7 +174,22 @@
 
 .message.me p
 {
-
 	background: #00B7FF;
 	color: #fff;
+}
+
+.message.me + .message.other
+{
+	margin-top: 10px;
+}
+
+/*============================
+	- CHATBOX TYPING SECTION
+============================*/
+
+#chat-box .text
+{
+	border-top: 1px solid #f2f2f2;
+	padding: 0 10px;
+	height: 5%;
 }
