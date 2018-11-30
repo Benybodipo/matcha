@@ -125,6 +125,11 @@ table.bordered td
 	color: white !important;
 }
 
+.btn:hover
+{
+	cursor: pointer;
+}
+
 /*=================
     - INPUTS -
 =================*/
