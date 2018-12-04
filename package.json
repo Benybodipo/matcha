@@ -4,7 +4,8 @@
   "description": "This is a dating app",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -17,15 +18,15 @@
   },
   "homepage": "https://github.com/Benybodipo/matcha#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "chalk": "^2.4.1",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
-    "mysql": "^2.16.0"
-  },
-  "devDependencies": {
+    "express-session": "^1.15.6",
+    "mongodb": "^3.1.10",
+    "mongoose": "^5.3.14",
+    "mysql": "^2.16.0",
     "nodemon": "^1.18.7"
- },
- "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
- } 
+  },
+  "devDependencies": {}
 }

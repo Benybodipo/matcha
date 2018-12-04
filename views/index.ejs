@@ -2,17 +2,17 @@
 <% include partials/header.ejs %>
 <div id="hero-section">
 	<div class="container">
-		<form action="" class="register clearfix">
+		<form action="/register" class="register clearfix" method="post">
 			<h2>SIGN UP</h2>
-			<input class="input" type="text" placeholder="First name">
-			<input class="input" type="text" placeholder="Email address">
-			<input class="input" type="text" placeholder="Last Name">
-			<input class="input" type="text" placeholder="Password">
-			<input class="input" type="text" placeholder="Username">
-			<input class="input" type="text" placeholder="Confitm password">
+			<input name="firstname" class="input" type="text" placeholder="First name">
+			<input name="lastname" class="input" type="text" placeholder="Email address">
+			<input name="email" class="input" type="text" placeholder="Last Name">
+			<input name="password" class="input" type="text" placeholder="Password">
+			<input name="username" class="input" type="text" placeholder="Username">
+			<input name="password2" class="input" type="text" placeholder="Confitm password">
 			<span class="gender">
-				<label for=""><input type="radio" name="gender">Male</label>
-				<label for=""><input type="radio" name="gender">Female</label>
+				<label for=""><input type="radio" name="gender" value="male">Male</label>
+				<label for=""><input type="radio" name="gender" value="female">Female</label>
 			</span>
 			<button class="btn shallow fill">SIGN UP</button>
 		</form>
