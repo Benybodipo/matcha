@@ -5,11 +5,12 @@ module.exports = function(req, res)
 		css: ["home"],
 		js: ["slider"]
 	};
-	// if(req.session.user)
-	// {
-	// 	// res.render('home', content);
-	// 	res.json(req.body);
-	// }
-	// else
-		res.json(req.body)
+
+	if(req.session.user)
+	{
+		// res.json(req.session);
+		res.render("home", content);
+	}
+	else
+		res.json({message: "Not logged in"})
 }

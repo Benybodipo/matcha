@@ -240,20 +240,25 @@ img.rounded
 =================*/
 .message-box
 {
-    border: 2px solid;
-    padding: 15px;
-    border-radius: 5px;
-    line-height: 1.5em;
+	border: 2px solid;
+	padding: 15px;
+	border-radius: 5px;
+	line-height: 1.5em;
 	max-width: 450px;
-	margin: 0 auto;
 	margin-top: 20px;
-
+	margin-bottom: 20px;
+	font-size: 1.05em;
 }
 .message-box.danger
 {
-	border-colorrebeccapurple;
-    border-color: #ff1c2661;
-    background: #ff1c2645;
+	border-color: #e8222b;
+	background: #f7636a;
+	color: #fff;
+}
+
+.message-box.danger ul li
+{
+	color: #fff;
 }
 
 /*=================

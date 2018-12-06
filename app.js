@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const config = require('./config/database');
 const bodyParser = require('body-parser');
+const validator = require('express-validator');
 const session = require('express-session');
 
 
@@ -10,13 +11,9 @@ app.set('view engine', 'ejs');
 app.use("/public", express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
-app.use(session(
-{
-	secret:"1234567890",
-	resave: false,
-	saveUninitialized:false,
-	// cookie: {secure: true}
-}))
+app.use(validator());
+app.use(session({ secret:"abcd", resave: false, saveUninitialized:false}));
+
 mongoose.connect(config.database, { useNewUrlParser: true});
 var db = mongoose.connection;
 
@@ -30,17 +27,27 @@ db.on('error', function(err) { console.log(err);});
 var indexController	  = require('./controllers/index-controller');
 var loginController	  = require('./controllers/login-controller');
 var homeController	  = require('./controllers/home-controller');
-
 var users = require('./controllers/users-contoller.js');
 
+/*======================
+	- GETS
+======================*/
 app.get("/", indexController);
 app.get("/login", loginController);
 app.get("/home", homeController);
+app.get("/logout", function (req, res){
+	if (req.session.user)
+		req.session.destroy(function (err){
+			if (err) throw err;
+			res.redirect("/login");
+		})
+})
 
-app.post("/login", users.login);
+/*======================
+	- POSTS
+======================*/
 app.post('/register', users.register);
-
-
+app.post("/login", users.login);
 
 
 
