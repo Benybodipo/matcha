@@ -5,10 +5,15 @@ const config = require('./config/database');
 const bodyParser = require('body-parser');
 const validator = require('express-validator');
 const session = require('express-session');
+const path = require('path');
+const hbs = require('express-handlebars');
 
 
-app.set('view engine', 'ejs');
-app.use("/public", express.static("public"));
+
+app.engine('hbs', hbs({extname: 'hbs', defaultLayout: 'main', layoutsDir: path.join(__dirname,'views/layouts/')}));
+app.set('view engine', 'hbs');
+
+app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 app.use(validator());
@@ -24,24 +29,25 @@ db.on('error', function(err) { console.log(err);});
 
 
 
-var indexController	  = require('./controllers/index-controller');
-var loginController	  = require('./controllers/login-controller');
-var homeController	  = require('./controllers/home-controller');
-var users = require('./controllers/users-contoller.js');
+var indexController	  = require('./controllers/index-controller'),
+	 loginController	  = require('./controllers/login-controller'),
+	 homeController	  = require('./controllers/home-controller'),
+	 userController	  = require('./controllers/user-controller'),
+	 profileController  = require('./controllers/profile-controller'),
+	 inboxController    = require('./controllers/inbox-controller');
+
+var users = require('./controllers/users.contoller.js');
 
 /*======================
 	- GETS
 ======================*/
 app.get("/", indexController);
 app.get("/login", loginController);
+app.get("/user", userController);
 app.get("/home", homeController);
-app.get("/logout", function (req, res){
-	if (req.session.user)
-		req.session.destroy(function (err){
-			if (err) throw err;
-			res.redirect("/login");
-		})
-})
+app.get("/profile", profileController);
+app.get("/inbox", inboxController);
+app.get("/logout", function (req, res){ });
 
 /*======================
 	- POSTS
