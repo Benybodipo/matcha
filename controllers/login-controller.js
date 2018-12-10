@@ -6,5 +6,9 @@ module.exports = function(req, res)
 		js: ["slider"],
 		layout: 'index'
 	};
-	res.render('login', content);
+
+	if (req.isAuthenticated())
+		res.redirect("/home");
+	else
+		res.render('login', content);
 }

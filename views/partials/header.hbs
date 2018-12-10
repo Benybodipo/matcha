@@ -25,10 +25,17 @@
 			<div class="logo"><i class="fas fa-heart"></i><a href="/">Matcha</a></div>
 			<nav>
 					<ul>
-						<li><a href="/" class="active">Home</a></li>
-						<li><a href="">About</a></li>
-						<li><a href="">Testimonial</a></li>
-						<li><a href="/login" class="btn-login">Login</a></li>
+						{{#if isAuthenticated}}
+							<li><a href="/home" class="active">Home</a></li>
+							<li><a href="/profile" class="">My profile</a></li>
+							<li><a href="/inbox" class="">Inbox</a></li>
+							<li><a href="/logout" class="">Logout</a></li>
+						{{else}}
+							<li><a href="/" class="active">Home</a></li>
+							<li><a href="">About</a></li>
+							<li><a href="">Testimonial</a></li>
+							<li><a href="/login" class="btn-login">Login</a></li>
+						{{/if}}
 					</ul>
 			</nav>
 		</div>

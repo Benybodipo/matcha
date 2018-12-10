@@ -5,6 +5,5 @@ module.exports = function(req, res)
 		css: ["chat"],
 		js: ["search"]
 	};
-
 	res.render("home", content);
 }
