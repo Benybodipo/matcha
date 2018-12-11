@@ -12,6 +12,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
 const path = require('path');
 const hbs = require('express-handlebars');
+const nodemailer = require('nodemailer');
 
 
 

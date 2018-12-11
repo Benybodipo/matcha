@@ -1,6 +1,9 @@
-let Users = require('../models/users.model');
-const bcrypt = require('bcryptjs');
-const passport = require('passport');
+const Users 		= require('../models/users.model');
+const Likns 		= require('../models/links.model');
+const bcrypt 		= require('bcryptjs');
+const passport 	= require('passport');
+const nodemailer 	= require('nodemailer');
+var mail 			= require("../config/nodemailer");
 require('../config/passport')(passport);
 
 module.exports.register = function(req, res) {
@@ -68,7 +71,29 @@ module.exports.register = function(req, res) {
 							if (err)
 								console.log(err);
 							else
-								res.redirect("home");
+							{
+								sendLink.save(function(err)
+								{
+									if (err)
+										console.log(err);
+									else
+									{
+										//Send confirmation mail
+										// var transporter = nodemailer.createTransport(mail.credentials);
+										// transporter.sendMail(mail.options("benybodipo@gmail.com", "ACCOUNT ACTIVATION", "Follow the link"), function (err, info){
+										// 	if (err) throw err;
+										// 	// Save link in database
+										// 	// var sendLink = new Likns({_id: req.user._id, link:"http://localhost:7500/login/?userid=12345&type=1", type:1});
+										// 	// sendLink.save(function(err) {
+										// 	// 	if (err)
+										// 	// 		console.log(err);
+										// 	// 	else
+										// 	// 		res.redirect('/login');
+										// 	// });
+										// });
+									}
+								});
+							}
 						});
 					});
 				});
