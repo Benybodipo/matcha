@@ -1,9 +1,10 @@
 const Users 		= require('../models/users.model');
-const Likns 		= require('../models/links.model');
+const Links 		= require('../models/links.model');
 const bcrypt 		= require('bcryptjs');
 const passport 	= require('passport');
 const nodemailer 	= require('nodemailer');
 var mail 			= require("../config/nodemailer");
+const TokenGenerator = require('uuid-token-generator');
 require('../config/passport')(passport);
 
 module.exports.register = function(req, res) {
@@ -14,30 +15,23 @@ module.exports.register = function(req, res) {
 		errors: null,
 		success: null
 	};
-	req.check("firstname", "First name too short").notEmpty().isLength({
-		min: 3
-	});
-	req.check("lastname", "Last name too short").notEmpty().isLength({
-		min: 3
-	});
-	req.check("username", "Username too short").notEmpty().isLength({
-		min: 3
-	});
+	req.check("firstname", "First name too short").notEmpty().isLength({ min: 3 });
+	req.check("lastname", "Last name too short").notEmpty().isLength({min: 3});
+	req.check("username", "Username too short").notEmpty().isLength({ min: 3 });
 	req.check("email", "Invalid e-mail").isEmail().normalizeEmail();
-	req.check("password").isLength({
-		min: 6
-	});
-	req.check("password2", "Password don't match").isLength({
-		min: 6
-	}).equals(req.body.password);
+	req.check("password").isLength({ min: 6 });
+	req.check("password2", "Password don't match").isLength({ min: 6}).equals(req.body.password);
 
 	var errors = req.validationErrors();
 
-	if (errors) {
+	if (errors)
+	{
 		content.errors = errors;
 		console.log(content.errors);
 		res.render("index", content);
-	} else {
+	}
+	else
+	{
 		var obj = {
 			firstname: req.body.firstname,
 			lastname: req.body.lastname,
@@ -46,15 +40,11 @@ module.exports.register = function(req, res) {
 			password: req.body.password,
 			gender: req.body.gender
 		}
-		Users.find({
-			$or: [{
-				username: req.body.username
-			}, {
-				email: req.body.email
-			}]
-		}, function(err, user) {
+
+		Users.find({ $or: [{username: req.body.username}, {email: req.body.email}]}, function(err, user) {
 			if (err) throw err;
-			if (user.length > 0) {
+			if (user.length > 0)
+			{
 				user = user[0];
 
 				if (user.email && user.email == obj.email)
@@ -62,47 +52,57 @@ module.exports.register = function(req, res) {
 				else if (user.username && user.username == obj.username)
 					errors = "Username already in use";
 				res.json(errors);
-			} else {
-				bcrypt.genSalt(10, function(err, salt) {
-					bcrypt.hash(obj.password, salt, function(err, hash) {
+			}
+			else
+			{
+				bcrypt.genSalt(10, function(err, salt)
+				{
+					bcrypt.hash(obj.password, salt, function(err, hash)
+					{
 						obj.password = hash;
+						var token = new TokenGenerator(256, TokenGenerator.BASE62);
 						var registerUser = new Users(obj);
-						registerUser.save(function(err) {
+						var linkObj = {
+							userid: registerUser._id,
+							token: token.generate(),
+							type:1
+						};
+						var newLink = new Links(linkObj);
+						registerUser.save(function(err)
+						{
 							if (err)
 								console.log(err);
 							else
 							{
-								sendLink.save(function(err)
+								newLink.save(function(err)
 								{
 									if (err)
 										console.log(err);
 									else
 									{
-										//Send confirmation mail
-										// var transporter = nodemailer.createTransport(mail.credentials);
-										// transporter.sendMail(mail.options("benybodipo@gmail.com", "ACCOUNT ACTIVATION", "Follow the link"), function (err, info){
-										// 	if (err) throw err;
-										// 	// Save link in database
-										// 	// var sendLink = new Likns({_id: req.user._id, link:"http://localhost:7500/login/?userid=12345&type=1", type:1});
-										// 	// sendLink.save(function(err) {
-										// 	// 	if (err)
-										// 	// 		console.log(err);
-										// 	// 	else
-										// 	// 		res.redirect('/login');
-										// 	// });
-										// });
-									}
+										var transporter = nodemailer.createTransport(mail.credentials);
+										var email = {
+											to: "benybodipo@gmail.com",
+											sbj: "ACCOUNT ACTIVATION",
+											msj: "Follow the link <a href='http://localhost:7500/login/"+obj.username+"/"+linkObj.userid+"/"+linkObj.token+"/"+linkObj.type+"'>CLICK</a>"
+										};
+
+										transporter.sendMail(mail.options(email.to, email.sbj, email.msj), function (err, info)
+										{
+											if (err) throw err;
+											res.redirect('/login');
+										});
+									};
 								});
 							}
 						});
 					});
 				});
 			}
-		})
+		});
+
 	}
-
 }
-
 
 module.exports.delete = function(req, res) {
 

@@ -1,3 +1,4 @@
+const TokenGenerator = require('uuid-token-generator');
 module.exports = function(req, res)
 {
 	var content = {

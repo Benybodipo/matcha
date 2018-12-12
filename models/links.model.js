@@ -3,12 +3,12 @@ const Schema = mongoose.Schema;
 
 var linksSchema = new mongoose.Schema({
 
-    _id:
+    userid:
 	 {
         type: Schema.ObjectId,
         required: true
     },
-    link:
+    token:
 	 {
         type: String,
         required: true
@@ -19,11 +19,6 @@ var linksSchema = new mongoose.Schema({
 		  min: 1,
 		  max: 1,
         required: true
-    },
-    timestamp:
-	 {
-        type: Date,
-		  default: Date.now
     }
 
 });

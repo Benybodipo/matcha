@@ -72,6 +72,7 @@ var users = require('./controllers/users.contoller.js');
 ======================*/
 app.get("/", indexController);
 app.get("/login", loginController);
+app.get("/login/:username/:id/:token/:type", loginController);
 app.get("/user", authenticationMiddleware(), userController);
 app.get("/home", authenticationMiddleware(), homeController);
 app.get("/profile", authenticationMiddleware(), profileController);
@@ -95,8 +96,6 @@ app.post("/login", passport.authenticate('local', {
 function authenticationMiddleware()
 {
 	return (req, res, next) => {
-		console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
-
 	    if (req.isAuthenticated()) return next();
 	    res.redirect('/login')
 	}
