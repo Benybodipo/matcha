@@ -1,5 +1,6 @@
 const Users 		= require('../models/users.model');
 const Links 		= require('../models/links.model');
+const Preferences 		= require('../models/preferences.model');
 const bcrypt 		= require('bcryptjs');
 const passport 	= require('passport');
 const nodemailer 	= require('nodemailer');
@@ -104,7 +105,51 @@ module.exports.register = function(req, res) {
 	}
 }
 
-module.exports.delete = function(req, res) {
+module.exports.profile = function(req, res) {
+		var userid = req.user._id;
 
+
+		var prefObj = {
+			gender: req.body.gender,
+			distance: req.body.distance,
+			visible: req.body.visible,
+			interests: JSON.parse(req.body.interests),
+			ages: JSON.parse(req.body.ages)
+		};
+
+		console.log(prefObj.interests);
+		var preferences = new Preferences(prefObj);
+
+		Preferences.findOne({_id: userid}, function(err, user){
+				if (!user) prefObj._id = userid;
+				console.log();
+				Preferences.updateOne({_id: userid}, prefObj, {upsert: true, safe: false}, function(err, x, z){
+					if (err)
+						console.log(err);
+					else
+						console.log("success");
+				});
+
+		});
+	// preferences.update({_id: userid}, {$set: prefObj}, {upsert: true, safe: false}, function(err, x, z){
+	// 	if (err)
+	// 		console.log("Error");
+	// 	else
+	// 		console.log("success");
+	// });
+
+		// preferences.save(function(err){
+		// 	if (err) //throw err;
+		// 		console.log("Error");
+		// 	console.log("Updating");
+		// })
+		// registerUser.save(function(err)
+		// Users.updateOne({_id: userid}, {bio: req.body.bio}, function(err, result){
+		// 	if (err) throw err;
+		// 	res.json(result);
+		// })
+
+}
+module.exports.delete = function(req, res) {
 
 }

@@ -86,9 +86,25 @@ table td
 	padding: 7px 20px 7px 0;
 }
 
-td input
+td input,
+textarea
 {
 	background: transparent;
+
+}
+
+textarea
+{
+	resize: none;
+	font-size: 1.1em;
+	line-height: 1.5;
+	max-width: 600px;
+}
+
+textarea:focus
+{
+	border: 1px solid lightgray;
+	padding: 5px;
 }
 
 /*===========================

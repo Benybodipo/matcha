@@ -91,6 +91,7 @@ app.post("/login", passport.authenticate('local', {
 	successRedirect: '/home',
 	failureRedirect: '/login'
 }));
+app.post('/profile', users.profile);
 
 
 function authenticationMiddleware()

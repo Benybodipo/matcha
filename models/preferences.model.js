@@ -3,9 +3,10 @@ const Schema = mongoose.Schema;
 
 var preferencesSchema = new mongoose.Schema({
 
-    _id: { type: Schema.ObjectId, required: true},
-    gender: { type: [Number]},
-    distance: { type: [Number]},
+    _id: { type: Schema.ObjectId},
+    gender: { type: Number},
+    distance: { type: Number},
+    ages: { type: [Number]},
     visible: { type: Boolean, default: true},
     interests: { type: [String]},
 
