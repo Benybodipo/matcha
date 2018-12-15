@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Dancing+Script|PT+Sans:400,700" rel="stylesheet">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.css">
 	<link rel="stylesheet" href="/css/master.css">
 	{{#each css}}
 		<link rel="stylesheet" href="/css/{{this}}.css">
@@ -20,6 +21,17 @@
 	{{#if isInbox}}
 		{{> chatbox }}
 	{{/if}}
+	<div class="cover">
+		<div class="img-container" id="image_wrapper">
+			<input type="file" name="img" value="" class="upload_img">
+			<div id="demo">
+
+			</div>
+			<img src="" alt="" id="demo-img" width="400px">
+			<button type="button" name="button" class="btn fill" id="crop-img">CROPE AND UPLOAD</button>
+		</div>
+
+	</div>
 	<header>
 		<div class="container">
 			<div class="logo"><i class="fas fa-heart"></i><a href="/">Matcha</a></div>

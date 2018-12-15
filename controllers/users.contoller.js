@@ -108,46 +108,44 @@ module.exports.register = function(req, res) {
 module.exports.profile = function(req, res) {
 		var userid = req.user._id;
 
+		if (req.body.action == "update-preferences")
+		{
+			var prefObj = {
+				gender: req.body.gender,
+				distance: req.body.distance,
+				visible: req.body.visible,
+				interests: JSON.parse(req.body.interests),
+				ages: JSON.parse(req.body.ages)
+			};
 
-		var prefObj = {
-			gender: req.body.gender,
-			distance: req.body.distance,
-			visible: req.body.visible,
-			interests: JSON.parse(req.body.interests),
-			ages: JSON.parse(req.body.ages)
-		};
+			var preferences = new Preferences(prefObj);
 
-		console.log(prefObj.interests);
-		var preferences = new Preferences(prefObj);
+			Preferences.findOne({_id: userid}, function(err, user){
+					if (!user) prefObj._id = userid;
+					Preferences.updateOne({_id: userid}, prefObj, {upsert: true, safe: false}, function(err, x, z){
+						if (err)
+							console.log(err);
+						else
+							console.log("success");
+					});
 
-		Preferences.findOne({_id: userid}, function(err, user){
-				if (!user) prefObj._id = userid;
-				console.log();
-				Preferences.updateOne({_id: userid}, prefObj, {upsert: true, safe: false}, function(err, x, z){
-					if (err)
-						console.log(err);
-					else
-						console.log("success");
-				});
+			});
+		}
+		else if(req.body.action == "update-info")
+		{
+			// Users.updateOne({_id: userid}, {bio: req.body.bio}, function(err, result){
+			// 	if (err) throw err;
+			// 	res.json(result);
+			// })
+			var pos = req.body.position;
+			var img = req.body.img;
+			Users.updateOne({_id: userid}, {$set: {"images.0": img}}, function(err, result){
+				if (err) throw err;
+				res.json(result);
+			});
+			// res.json(req.body);
+		}
 
-		});
-	// preferences.update({_id: userid}, {$set: prefObj}, {upsert: true, safe: false}, function(err, x, z){
-	// 	if (err)
-	// 		console.log("Error");
-	// 	else
-	// 		console.log("success");
-	// });
-
-		// preferences.save(function(err){
-		// 	if (err) //throw err;
-		// 		console.log("Error");
-		// 	console.log("Updating");
-		// })
-		// registerUser.save(function(err)
-		// Users.updateOne({_id: userid}, {bio: req.body.bio}, function(err, result){
-		// 	if (err) throw err;
-		// 	res.json(result);
-		// })
 
 }
 module.exports.delete = function(req, res) {

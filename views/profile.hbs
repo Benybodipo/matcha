@@ -1,11 +1,12 @@
 <div id="info" class="clearfix">
 	<div id="profile-img">
-		<img src="img/face2.jpg" alt="" class="rounded"><br>
+		<img src="{{profileImg}}" alt="" class="rounded"><br>
 		<i class="fas fa-pen-square"></i>Edit<br><br><br>
 		<div class="img clearfix"><img alt="" src="img/face1.jpg"></div>
 		<div class="img clearfix"><img alt="" src="img/face3.jpg"></div>
 		<div class="img clearfix"><img alt="" src="img/face5.jpg"></div>
 		<div class="img clearfix"><img alt="" src="img/face4.jpg"></div>
+
 	</div>
 	<div id="about">
 		<h2>{{user.username}}, 21</h2>
@@ -47,7 +48,7 @@
 	</div>
 	<div class="box clearfix">
 		<strong>Age range</strong>
-		<div class="range"><span>18</span>-<span>32</span></div>
+		<div class="range"><span class="min">{{ages.min}}</span>-<span class="max">{{ages.max}}</span></div>
 		<div id="slider-range"></div>
 	</div>
 

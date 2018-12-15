@@ -7,7 +7,8 @@ module.exports = function(req, res)
 			css: ["profile"],
 			js: ["profile"],
 			user: req.user,
-			preferences:preferences
+			preferences:preferences,
+			profileImg: req.user.images[0]
 		};
 		content.sex = {
 			men: (preferences.gender == 1) ? "checked" : "",
@@ -26,11 +27,9 @@ module.exports = function(req, res)
 			books: (interests.indexOf("books") >= 0) ? "checked" : ""
 		}
 
+		content.ages = {min: preferences.ages[0], max: preferences.ages[1]};
 
-		console.log(interests.indexOf("movies"));
-		console.log(content.interests.movies);
 		content.user.bio = (req.user.bio) ? req.user.bio : "";
-		// content.user.bio = (req.user.bio) ? req.user.bio : "";
 		res.render("profile", content);
 	})
 
