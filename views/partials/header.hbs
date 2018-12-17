@@ -22,15 +22,20 @@
 		{{> chatbox }}
 	{{/if}}
 	<div class="cover">
-		<div class="img-container" id="image_wrapper">
-			<input type="file" name="img" value="" class="upload_img">
-			<div id="demo">
-
+		<div class="img-container clearfix" id="image_wrapper">
+			<div class="top-icons">
+				<i class="far fa-times-circle" id="close"></i>
 			</div>
-			<img src="" alt="" id="demo-img" width="400px">
-			<button type="button" name="button" class="btn fill" id="crop-img">CROPE AND UPLOAD</button>
-		</div>
+			<input type="file" name="img" value="" class="upload_img">
+			<div id="demo"></div>
+			<img src="" alt="" id="img_preview">
+			<div class="controls">
+				<button type="button" class="btn upload" id="upload">upload</button>
+				<button type="button" class="btn crop" id="crop">crop</button>
+				<button type="button" class="btn fill" id="save">save</button>
+			</div>
 
+		</div>
 	</div>
 	<header>
 		<div class="container">

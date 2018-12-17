@@ -1,9 +1,10 @@
 $( function() {
 
-	var sizes = {
-		width: 0,
-		height: 0
-	};
+
+
+	var res = {
+		result: null
+	}
 
 	var img = $("#demo").croppie({
 		enableExif: true,
@@ -18,11 +19,24 @@ $( function() {
 		}
 	});
 
+	$("#profile-img img").click(function(e) {
+		var url = $(this).attr("src");
+		var num = $(this).attr("data-number");
+		console.log(num);
+
+		img.croppie("bind", {
+			url: url
+		}).then(function(){
+			console.log("Uploaded");
+		});
+
+		$(".cover").fadeIn();
+	});
+
 	$(".upload_img").on("change", function(e)
 	{
 
 		var obj = new FileReader();
-
 		obj.onload = function(data)
 		{
 			img.croppie("bind", {
@@ -32,26 +46,43 @@ $( function() {
 			});
 		}
 		obj.readAsDataURL(this.files[0]);
+
 	});
 
-	$("#crop-img").click(function(e){
+	$("#upload").click(function(){ $(".upload_img").click();});
+
+	$("#crop").click(function(e){
 		img.croppie("result", {
 			type: 'canvas',
 			size: 'viewport',
 			format: "jpeg",
 			quality: .5
 		}).then(function(response){
-			$.ajax({
-	 		  url: "/profile",
-	 		  method: 'POST',
-	 		  data: {action:"update-info", positio: 0, img: response},
-	 		  success: function(res)
-	 		  {
-	 			  console.log(res);
-	 		  }
-	 	  });
+			$("#img_preview").css({border: "none"});
+			$("#img_preview").attr("src",response);
+			res.result = response;
 		});
 	})
+
+	$("#save").click(function(){
+
+		$.ajax({
+		  url: "/profile",
+		  method: 'POST',
+		  data: {action:"update-info", positio: 0, img: res.result},
+		  success: function(res)
+		  {
+			  console.log(res);
+		  }
+	  });
+
+	})
+
+
+
+	$("#close").click(function(){ $(".cover").fadeOut();});
+
+
 
 
 	/*========================
