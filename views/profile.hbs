@@ -6,29 +6,38 @@
 		<div class="img clearfix"><img alt="" src="img/face3.jpg" data-number="2"></div>
 		<div class="img clearfix"><img alt="" src="img/face5.jpg" data-number="3"></div>
 		<div class="img clearfix"><img alt="" src="img/face4.jpg" data-number="4"></div>
-
 	</div>
 	<div id="about">
-		<h2>{{user.username}}, 21</h2>
+		<h2><input type="text" value="{{user.username}}" name="username">, 21</h2>
 		<strong>Cape Town, South Africa</strong>
 
 		<h2>About Me:</h2>
-		<!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, a! Eius distinctio modi, incidunt nam ex aut provident dicta ducimus!</p>
-		<p>Facere praesentium commodi natus autem repellat, maxime suscipit vitae blanditiis quisquam soluta, eos quia est earum consequatur laborum, reprehenderit aliquam.</p> -->
-		<textarea name="name" rows="8" cols="80" placeholder="Click to write biography..">{{user.bio}}</textarea>
+		<textarea name="bio" rows="8" cols="80" placeholder="Click to write biography..">{{user.bio}}</textarea>
 		<h2>Info: </h2>
 		<table>
 			<tr>
 				<td>Name:</td>
-				<td><input type="text" value="{{user.firstname}}" name="name"></td>
+				<td><input type="text" value="{{user.firstname}}" name="firstname"></td>
 			</tr>
 			<tr>
 				<td>Surname:</td>
-				<td><input type="text" value="{{user.lastname}}"></td>
+				<td><input type="text" name="lastname" value="{{user.lastname}}"></td>
 			</tr>
 			<tr>
 				<td>Email Address:</td>
-				<td><input type="text" value="{{user.email}}"></td>
+				<td><input type="text" name="email" value="{{user.email}}"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><br> </td>
+			</tr>
+			<tr>
+				<td>Password</td>
+				<td><input type="password" name="password" value="" placeholder="******"></td>
+			</tr>
+			<tr>
+				<td>Confirm Password</td>
+				<td><input type="password" name="confirm-password" value="" placeholder="******"></td>
 			</tr>
 		</table>
 	</div>

@@ -105,6 +105,13 @@ module.exports.register = function(req, res) {
 	}
 }
 
+function updateInfo(res, obj, userid)
+{
+	Users.updateOne({_id: userid}, {$set: obj}, function(err, result){
+		if (err) throw err;
+		res.json(result);
+	});
+}
 module.exports.profile = function(req, res) {
 		var userid = req.user._id;
 
@@ -133,17 +140,79 @@ module.exports.profile = function(req, res) {
 		}
 		else if(req.body.action == "update-info")
 		{
-			// Users.updateOne({_id: userid}, {bio: req.body.bio}, function(err, result){
-			// 	if (err) throw err;
-			// 	res.json(result);
-			// })
-			var pos = req.body.position;
-			var img = req.body.img;
-			Users.updateOne({_id: userid}, {$set: {"images.0": img}}, function(err, result){
-				if (err) throw err;
-				res.json(result);
-			});
-			// res.json(req.body);
+			var pos = req.body.position,
+				 img = req.body.img,
+				 field = req.body.field,
+				 value = req.body.value;
+
+			if (img)
+			{
+				var imageObj = JSON.parse('{"images.'+pos+'": "'+img+'"}');
+				Users.updateOne({_id: userid}, {$set: imageObj}, function(err, result){
+					if (err) throw err;
+					res.json(result);
+				});
+			}
+			else
+			{
+				var infoObj = JSON.parse('{"'+field+'": "'+value+'"}');
+				var errors = [];
+
+				if (field == "username")
+				{
+					req.check("value", "Username too short").notEmpty().isLength({ min: 3 });
+					errors = req.validationErrors();
+					console.log(123);
+					if (errors)
+						res.json(errors[0].msg);
+					else
+					{
+						Users.find(infoObj, function(err, result){
+							if (err) throw err;
+							if (result.length >= 1)
+								res.json("Username already in use");
+							else
+								updateInfo(res, infoObj, userid);
+						});
+					}
+				}
+				else if (field == "email")
+				{
+					req.check("value", "Invalid e-mail").isEmail().normalizeEmail();
+					errors = req.validationErrors();
+
+					if (errors)
+						res.json(errors[0].msg);
+					else
+					{
+						Users.find(infoObj, function(err, result){
+							if (err) throw err;
+							if (result.length >= 1)
+								res.json("Email already in use");
+							else
+								updateInfo(res, infoObj, userid);
+						});
+					}
+				}
+				else if (field == "confirm-password")
+				{
+					req.check("value", "Unsecure Password").isLength({ min: 6});
+					errors = req.validationErrors();
+					if (errors)
+						res.json(errors[0].msg);
+					else
+					{
+						bcrypt.genSalt(10, function(err, salt){
+							if (err) throw err;
+							bcrypt.hash(value, salt, function(err, hash)
+							{
+								var infoObj = JSON.parse('{"'+field+'": "'+hash+'"}');
+								updateInfo(res, infoObj, userid);
+							});
+						});
+					}
+				}
+			}
 		}
 
 

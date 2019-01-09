@@ -16,6 +16,17 @@ h2:not(:first-child)
 	margin-bottom: 15px;
 }
 
+h2 input
+{
+	font-family: 'PT Sans', sans-serif;
+	font-weight: 700;
+	font-size: 1em;
+	margin-right: 5px;
+	background: transparent;
+	padding: 0;
+	display: inline-block !important;
+}
+
 p,
 td,
 td input
@@ -90,7 +101,6 @@ td input,
 textarea
 {
 	background: transparent;
-
 }
 
 textarea

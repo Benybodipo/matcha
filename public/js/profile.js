@@ -3,7 +3,8 @@ $( function() {
 
 
 	var res = {
-		result: null
+		result: null,
+		position: null
 	}
 
 	var img = $("#demo").croppie({
@@ -22,8 +23,7 @@ $( function() {
 	$("#profile-img img").click(function(e) {
 		var url = $(this).attr("src");
 		var num = $(this).attr("data-number");
-		console.log(num);
-
+		res.position = $("#profile-img img").index(this);
 		img.croppie("bind", {
 			url: url
 		}).then(function(){
@@ -65,11 +65,11 @@ $( function() {
 	})
 
 	$("#save").click(function(){
-
+		console.log(res.position);
 		$.ajax({
 		  url: "/profile",
 		  method: 'POST',
-		  data: {action:"update-info", positio: 0, img: res.result},
+		  data: {action:"update-info", position: res.position, img: res.result},
 		  success: function(res)
 		  {
 			  console.log(res);
@@ -162,18 +162,38 @@ $( function() {
 	}
 
 
-	$("textarea").keyup(function(){
-		var bio = $(this).val();
+	$("table td input, h2 input, textarea").blur(function(e) {
 
-		$.ajax({
-			url: "/profile",
-			method: 'POST',
-			data: {bio: bio},
-			success: function(res)
-			{
-				console.log(res);
-			}
-		});
+		var field = $(this).attr("name");
+		var value = $(this).val();
+		var valid = 1;
+
+		var data = {
+			field: field,
+			value: value,
+			action: "update-info"
+		};
+
+		if (field == "confirm-password")
+		{
+			if (value.trim() != $("input[name=password]").val().trim())
+				valid = 0;
+		}
+		console.log($("input[name=password]").val());
+		console.log($("input[name=password]").val().trim());
+		return;
+		if (field != "password" && valid == 1)
+		{
+			$.ajax({
+				url: "/profile",
+				method: 'POST',
+				data: data,
+				success: function(res)
+				{
+					console.log(res);
+				}
+			});
+		}
 	});
 
 
