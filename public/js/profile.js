@@ -179,9 +179,6 @@ $( function() {
 			if (value.trim() != $("input[name=password]").val().trim())
 				valid = 0;
 		}
-		console.log($("input[name=password]").val());
-		console.log($("input[name=password]").val().trim());
-		return;
 		if (field != "password" && valid == 1)
 		{
 			$.ajax({
@@ -194,6 +191,19 @@ $( function() {
 				}
 			});
 		}
+	});
+
+	$(".delete-account").click(function(e) {
+		$.ajax({
+			url: "/profile",
+			method: 'POST',
+			data: {action: "delete-account"},
+			success: function(res)
+			{
+				if (res.success ==  1)
+					window.location.href = "/";
+			}
+		});
 	});
 
 

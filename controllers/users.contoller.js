@@ -8,6 +8,9 @@ var mail 			= require("../config/nodemailer");
 const TokenGenerator = require('uuid-token-generator');
 require('../config/passport')(passport);
 
+/*============================
+		- REGISTER
+============================*/
 module.exports.register = function(req, res) {
 	var content = {
 		title: "Matcha | Welcome",
@@ -112,6 +115,10 @@ function updateInfo(res, obj, userid)
 		res.json(result);
 	});
 }
+
+/*============================
+		- UPDATE PROFILE
+============================*/
 module.exports.profile = function(req, res) {
 		var userid = req.user._id;
 
@@ -162,7 +169,7 @@ module.exports.profile = function(req, res) {
 				{
 					req.check("value", "Username too short").notEmpty().isLength({ min: 3 });
 					errors = req.validationErrors();
-					console.log(123);
+
 					if (errors)
 						res.json(errors[0].msg);
 					else
@@ -198,6 +205,7 @@ module.exports.profile = function(req, res) {
 				{
 					req.check("value", "Unsecure Password").isLength({ min: 6});
 					errors = req.validationErrors();
+
 					if (errors)
 						res.json(errors[0].msg);
 					else
@@ -206,7 +214,7 @@ module.exports.profile = function(req, res) {
 							if (err) throw err;
 							bcrypt.hash(value, salt, function(err, hash)
 							{
-								var infoObj = JSON.parse('{"'+field+'": "'+hash+'"}');
+								var infoObj = JSON.parse('{"password": "'+hash+'"}');
 								updateInfo(res, infoObj, userid);
 							});
 						});
@@ -214,9 +222,13 @@ module.exports.profile = function(req, res) {
 				}
 			}
 		}
-
-
-}
-module.exports.delete = function(req, res) {
-
+		else if(req.body.action == "delete-account")
+		{
+			Users.deleteOne({_id: userid}, function(err, result){
+				if (err) throw err;
+				req.logout();
+				req.session.destroy();
+				res.json({success: 1});
+			});
+		}
 }

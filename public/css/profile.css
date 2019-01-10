@@ -210,3 +210,20 @@ textarea:focus
 {
 	color: #F0005E !important;
 }
+
+.delete-account
+{
+	font-size: .9em;
+	font-weight: 400;
+	border: 1px solid #eae3e3;
+	color: lightgray;
+	padding: 7.5px 15px;
+	transition: .5s all;
+}
+
+.delete-account:hover
+{
+	border-color: red;
+	color: white;
+	background: red;
+}

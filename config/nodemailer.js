@@ -4,7 +4,7 @@ const credentials = {
 	service: 'gmail',
 	auth: {
 		user: '',
-		pass: ''
+		pass: '123'
 	},
 	tls: {
 		rejectUnauthorized: false
