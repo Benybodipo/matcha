@@ -1,14 +1,15 @@
 const nodemailer = require('nodemailer');
 
 const credentials = {
-	service: 'gmail',
+	service: 'Gmail',
 	auth: {
 		user: '',
 		pass: ''
 	},
 	tls: {
 		rejectUnauthorized: false
-	}
+	},
+	debug: true
 };
 
 var options = function options(to, subject, message)

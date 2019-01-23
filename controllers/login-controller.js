@@ -1,5 +1,6 @@
 const Users 		= require('../models/users.model');
 const Links 		= require('../models/links.model');
+const Preferences = require('../models/preferences.model');
 
 module.exports = function(req, res)
 {
@@ -21,12 +22,33 @@ module.exports = function(req, res)
 					if (err) throw err;
 					if (user)
 					{
+						/*===============================
+							- Change status to active
+						===============================*/
 						Users.update({_id: req.params.id}, {active: 1}, function(err, res){
 							if (err) throw err;
 							Links.remove({userid: req.params.id, token: req.params.token}, function(err, obj){
 								if (err) throw err;
-							})
+							});
+
+							/*=================================
+								- Create default preferences
+							=================================*/
+							var preferences = {
+								_id: req.params.id,
+								ages: [18, 50],
+								distance: 50,
+								gender: (user.gender == "male") ? 2 : 1,
+								visible: false
+							};
+							var defaultPreferences = new Preferences(preferences);
+
+							defaultPreferences.save(function(err, res) {
+								if (err) throw err;
+								console.log("success");
+							});
 						});
+
 					}
 				});
 			}

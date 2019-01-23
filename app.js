@@ -73,7 +73,7 @@ var users = require('./controllers/users.contoller.js');
 app.get("/", indexController);
 app.get("/login", loginController);
 app.get("/login/:username/:id/:token/:type", loginController);
-app.get("/user", authenticationMiddleware(), userController);
+app.get("/user/:id", authenticationMiddleware(), userController);
 app.get("/home", authenticationMiddleware(), homeController);
 app.get("/profile", authenticationMiddleware(), profileController);
 app.get("/inbox", authenticationMiddleware(), inboxController);
@@ -103,5 +103,5 @@ function authenticationMiddleware()
 }
 
 app.listen(7500, function() {
-	console.log("runing on port 8080");
+	console.log("runing on port 7500");
 });

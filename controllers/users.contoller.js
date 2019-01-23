@@ -72,6 +72,8 @@ module.exports.register = function(req, res) {
 							type:1
 						};
 						var newLink = new Links(linkObj);
+
+						
 						registerUser.save(function(err)
 						{
 							if (err)

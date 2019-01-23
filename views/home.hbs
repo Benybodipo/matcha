@@ -1,36 +1,11 @@
-<div class="user">
-	<img src="img/face4.jpg" alt="">
-	<strong></strong>
-	<div class="status">
-		<span class="online"></span>
-		<small>Online</small>
+{{#each users}}
+	<div class="user">
+		<img src="img/face4.jpg" alt="">
+		<strong></strong>
+		<div class="status">
+			<span class="online"></span>
+			<small>{{username}}</small>
+		</div>
+		<a href="/user/{{_id}}" class="btn">MORE</a>
 	</div>
-	<a href="" class="btn">MORE</a>
-</div>
-<div class="user">
-	<img src="img/face2.jpg" alt="">
-	<strong></strong>
-	<div class="status">
-		<span class="online"></span>
-		<small>Online</small>
-	</div>
-	<a href="" class="btn">MORE</a>
-</div>
-<div class="user">
-	<img src="img/face1.jpg" alt="">
-	<strong></strong>
-	<div class="status">
-		<span class="offline"></span>
-		<small>Online</small>
-	</div>
-	<a href="" class="btn">MORE</a>
-</div>
-<div class="user">
-	<img src="img/face3.jpg" alt="">
-	<strong></strong>
-	<div class="status">
-		<span class="offline"></span>
-		<small>Online</small>
-	</div>
-	<a href="" class="btn">MORE</a>
-</div>
+{{/each}}
