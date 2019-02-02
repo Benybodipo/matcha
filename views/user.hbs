@@ -1,7 +1,14 @@
-
 <div id="info" class="clearfix">
 	<div id="profile-img">
-		<img src="img/face4.jpg" alt="" class="rounded"><br>
+		{{#unless user.images.length}}
+			{{#if gender}}
+				<img src="img/male.png" alt=""><br>
+			{{else}}
+				<img src="img/female.jpeg" alt=""><br>
+			{{/if}}
+		{{else}}
+			<img src="{{user.images}}" alt=""><br>
+		{{/unless}}
 		<div class="star">
 			<i class="fas fa-star"></i>
 			<i class="fas fa-star"></i>
@@ -15,7 +22,7 @@
 		<div class="img clearfix"><img alt="" src="img/face2.jpg"></div>
 	</div>
 	<div id="about">
-		<h2>Benita, 35</h2>
+		<h2>{{user.username}}, <span class="age"></span></h2>
 		<strong>3km away</strong><br>
 		<strong>Cape Town, South Africa</strong>
 
@@ -27,11 +34,11 @@
 		<table>
 			<tr>
 				<td>Name:</td>
-				<td>Maximiliano</td>
+				<td>{{user.firstname}}</td>
 			</tr>
 			<tr>
 				<td>Surname:</td>
-				<td>Wilson</td>
+				<td>{{user.lastname}}</td>
 			</tr>
 			<tr>
 				<td>I am looking for:</td>

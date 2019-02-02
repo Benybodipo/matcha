@@ -1,6 +1,16 @@
 $( function() {
 
 
+	if (navigator.geolocation)
+	{
+		navigator.geolocation.getCurrentPosition(function(position){
+			console.log("Latitude: " +position.coords.latitude);
+			console.log("Longitude: " + position.coords.longitude);
+		});
+	}
+	else
+		noGeolocation();
+	
 
 	var res = {
 		result: null,

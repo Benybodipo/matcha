@@ -35,17 +35,14 @@ module.exports = function(req, res)
 								- Create default preferences
 							=================================*/
 							var preferences = {
-								_id: req.params.id,
-								ages: [18, 50],
-								distance: 50,
 								gender: (user.gender == "male") ? 2 : 1,
-								visible: false
+								distance: 50,
+								ages: [18, 50]
 							};
-							var defaultPreferences = new Preferences(preferences);
 
-							defaultPreferences.save(function(err, res) {
+							Users.update({_id: req.params.id}, {preferences: preferences}, function(err, res){
 								if (err) throw err;
-								console.log("success");
+								console.log(res);
 							});
 						});
 

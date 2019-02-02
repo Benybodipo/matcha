@@ -43,6 +43,12 @@
 			<nav>
 					<ul>
 						{{#if isAuthenticated}}
+							<li class="bell">
+								<a href="" class="notification"><i class="fas fa-bell"></i></a>
+								<span id="notificationsCount"></span>
+								<ul class="clearfix shadow"></ul>
+							</li>
+							<li></li>
 							<li><a href="/home" class="active">Home</a></li>
 							<li><a href="/profile" class="">My profile</a></li>
 							<li><a href="/inbox" class="">Inbox</a></li>

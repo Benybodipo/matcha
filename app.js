@@ -13,6 +13,7 @@ const bcrypt = require('bcryptjs');
 const path = require('path');
 const hbs = require('express-handlebars');
 const nodemailer = require('nodemailer');
+const Notifications = require('./models/notifications.model');
 
 
 
@@ -77,6 +78,13 @@ app.get("/user/:id", authenticationMiddleware(), userController);
 app.get("/home", authenticationMiddleware(), homeController);
 app.get("/profile", authenticationMiddleware(), profileController);
 app.get("/inbox", authenticationMiddleware(), inboxController);
+app.get("/notifications", authenticationMiddleware(), function(req, res){
+	Notifications.find({userId: req.user._id, status: 0}, function(err, notifications){
+		if (err) throw err;
+		res.send(notifications);
+	});
+});
+
 app.get("/logout", authenticationMiddleware(), function(req, res){
 	req.logout();
 	req.session.destroy();

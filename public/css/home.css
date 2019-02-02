@@ -62,6 +62,21 @@ form .btn
 	margin-top: 20px;
 }
 
+#dob
+{
+	display: block;
+	width: 100%;
+	margin-top: 15px;
+	margin-bottom: 5px;
+	font-weight: normal;
+	font-size: inherit;
+}
+
+select
+{
+	background: transparent;
+}
+
 .gender
 {
 	display: inline-block;

@@ -60,7 +60,14 @@ var usersSchema = new mongoose.Schema({
 	 {
         type: Date,
 		  default: Date.now
-    }
+    },
+	preferences:{
+		gender: { type: Number},
+	    distance: { type: Number},
+	    ages: { type: [Number]},
+	    visible: { type: Boolean, default: true},
+	    interests: { type: [String]}
+	}
 
 });
 

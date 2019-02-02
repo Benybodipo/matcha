@@ -19,6 +19,8 @@ module.exports.register = function(req, res) {
 		errors: null,
 		success: null
 	};
+
+
 	req.check("firstname", "First name too short").notEmpty().isLength({ min: 3 });
 	req.check("lastname", "Last name too short").notEmpty().isLength({min: 3});
 	req.check("username", "Username too short").notEmpty().isLength({ min: 3 });
@@ -36,13 +38,15 @@ module.exports.register = function(req, res) {
 	}
 	else
 	{
+		var birthdate = req.body.month +" "+ req.body.day +","+req.body.year;
 		var obj = {
 			firstname: req.body.firstname,
 			lastname: req.body.lastname,
 			username: req.body.username,
 			email: req.body.email,
 			password: req.body.password,
-			gender: req.body.gender
+			gender: req.body.gender,
+			birthday: birthdate
 		}
 
 		Users.find({ $or: [{username: req.body.username}, {email: req.body.email}]}, function(err, user) {
@@ -59,6 +63,7 @@ module.exports.register = function(req, res) {
 			}
 			else
 			{
+
 				bcrypt.genSalt(10, function(err, salt)
 				{
 					bcrypt.hash(obj.password, salt, function(err, hash)
@@ -73,7 +78,7 @@ module.exports.register = function(req, res) {
 						};
 						var newLink = new Links(linkObj);
 
-						
+
 						registerUser.save(function(err)
 						{
 							if (err)
@@ -136,9 +141,11 @@ module.exports.profile = function(req, res) {
 
 			var preferences = new Preferences(prefObj);
 
-			Preferences.findOne({_id: userid}, function(err, user){
-					if (!user) prefObj._id = userid;
-					Preferences.updateOne({_id: userid}, prefObj, {upsert: true, safe: false}, function(err, x, z){
+			Users.findOne({_id: userid}, function(err, user){
+					if (!user)
+						prefObj._id = userid;
+
+					Users.updateOne({_id: userid}, {preferences: prefObj}, {upsert: true, safe: false}, function(err, x, z){
 						if (err)
 							console.log(err);
 						else
@@ -221,6 +228,11 @@ module.exports.profile = function(req, res) {
 							});
 						});
 					}
+				}
+				else
+				{
+
+					updateInfo(res, infoObj, userid);
 				}
 			}
 		}

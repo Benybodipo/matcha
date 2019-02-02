@@ -1,21 +1,27 @@
-const Preferences 		= require('../models/preferences.model');
+const Users 	  = require('../models/users.model');
+
 module.exports = function(req, res)
 {
-	Preferences.findOne({_id: req.user._id}, function(err, preferences){
+	Users.findOne({_id: req.user._id}, function(err, preferences){
+
+		var defaultProfileImg;
+		if (req.user.images.length == 0)
+			defaultProfileImg =  (req.user.gender == "male") ? "img/male.png" : "img/female.jpeg";
+
 		var content = {
 			title: "Matcha | Profile",
 			css: ["profile"],
 			js: ["profile"],
 			user: req.user,
-			preferences:preferences,
-			profileImg: req.user.images[0]
+			preferences:req.user.preferences,
+			profileImg: (req.user.images.length) ? req.user.images[0] : defaultProfileImg
 		};
 		content.sex = {
-			men: (preferences.gender == 1) ? "checked" : "",
-			women: (preferences.gender == 2) ? "checked" : "",
-			both: (preferences.gender == 3) ? "checked" : ""
+			men: (req.user.preferences.gender == 1) ? "checked" : "",
+			women: (req.user.preferences.gender == 2) ? "checked" : "",
+			both: (req.user.preferences.gender == 3) ? "checked" : ""
 		}
-		var interests = preferences.interests;
+		var interests = req.user.preferences.interests;
 		content.interests = {
 			movies: (interests.indexOf("movies") >= 0) ? "checked" : "",
 			art: (interests.indexOf("art") >= 0) ? "checked" : "",
@@ -27,10 +33,9 @@ module.exports = function(req, res)
 			books: (interests.indexOf("books") >= 0) ? "checked" : ""
 		}
 
-		content.ages = {min: preferences.ages[0], max: preferences.ages[1]};
-
+		content.ages = {min: req.user.preferences.ages[0], max: req.user.preferences.ages[1]};
 		content.user.bio = (req.user.bio) ? req.user.bio : "";
 		res.render("profile", content);
-	})
+	});
 
 }
