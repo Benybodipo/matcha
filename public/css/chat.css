@@ -1,11 +1,11 @@
 
-main .container
+/* main .container
 {
 	position: relative;
 	min-height: 1200px;
 	overflow-x: hidden;
 	padding: 100px 0;
-}
+} */
 
 .menu
 {
@@ -71,23 +71,20 @@ li .fa-eye
 ============================*/
 #chat
 {
-	width: 100%;
+	display: inline-block;
+	width: 39%;
 	max-width: 500px;
-	height: 700px;
-	min-height: 700px;
-	box-shadow: 0 1px 20px lightgray;
+	height: 100% !important;
+	min-height: calc(1200px - 200px);
 	background: #fff;
-	position: fixed;
-	z-index: 10000;
-	top: calc(100vh - 720px);
-	right: 0;
-	display: none;
+	margin-top: 15px;
 }
 
 #chat-box
 {
 	float: right;
 	height: 100% !important;
+	width: 100%
 }
 
 /*============================
@@ -99,8 +96,8 @@ li .fa-eye
 	padding: 5px 10px;
 	margin-bottom: 15px;
 	color: #fff;
-	height: 7%;
-	width: 100%;
+	height: 50px;
+	max-width: 100%;
 }
 
 #chat-box .header .user-info
@@ -159,7 +156,7 @@ li .fa-eye
 ============================*/
 .messages
 {
-	height: calc(100% - 16%);
+	height: calc(calc(1200px - 200px) - 100px);
 	padding: 0 10px;
 }
 
@@ -168,11 +165,12 @@ li .fa-eye
 	height: 100%;
 	width: 100%;
 	font-size: 1.05em;
-	padding: 5px 10px;
+	padding: 10px 10px;
 	resize: none;
 }
 
-.message
+.message.me,
+.message.other
 {
 	font-size: .95em;
 	display: block;
@@ -215,7 +213,7 @@ li .fa-eye
 {
 	border-top: 1px solid #f2f2f2;
 	padding: 0 10px;
-	height: 5%;
+	height: 50px;
 }
 
 /*============================
@@ -319,34 +317,18 @@ li .fa-eye
 	font-weight: 400;
 }
 
+#search-panel ul
+{
+	margin-top: 70px;
 }
 
-#search-panel ul li
-{
-	background:
-}
 #search-panel ul li a
 {
 	display: block;
 	color: #f2f2f2;
 	font-size: 1.2em;
 	padding: 15px 15px;
-}
-
-#search-panel ul li a::after
-{
-	content: " ";
-	display: block;
-	width: 0;
-	background: #F0005E;
-	height: 2px;
-	transition: all .3s;
-	margin-top: 10px;
-}
-
-#search-panel ul li a:hover:after
-{
-	width: 50%;
+	padding-bottom: 5px;
 }
 
 #search-panel ul li a i
@@ -357,7 +339,7 @@ li .fa-eye
 
 .box
 {
-	margin: 25px;
+	margin: 0 15px 15px;
 }
 
 .box strong
@@ -365,19 +347,20 @@ li .fa-eye
 	color: #f2f2f2;
 	margin-bottom: 15px;
 }
+
 .ui-slider-range
 {
 	background: #F0005E !important;
 }
+
 .ui-slider-handle
 {
 	border-radius: 50% !important;
 	background: #00B7FF !important;
 }
 
-#master
+.box div
 {
-	width: 100% !important;
 	margin: 0 !important;
 }
 
@@ -395,7 +378,55 @@ li .fa-eye
 	color: #F0005E;
 }
 
-.box
+.btn-search
 {
-	margin-top: 15px;
+	border: none;
+	margin-left: 15px;
+	margin-top: 50px;
+}
+
+#gender
+{
+	margin-left: 15px;
+}
+
+#gender label
+{
+	color: #fff;
+	display: inline-block;
+	padding: 5px;
+	cursor: pointer;
+}
+
+#gender label:nth-child(1)
+{
+	color: #00b7ff;
+}
+
+#gender label:nth-child(2)
+{
+	color: #f0005e;
+}
+
+#gender label:nth-child(3)
+{
+	background: -webkit-linear-gradient(90deg, rgba(0,183,255,1) 0%, rgba(240,0,94,1) 100%);
+	-webkit-background-clip: text;
+  	-webkit-text-fill-color: transparent;
+}
+
+
+#gender label input
+{
+	margin-right: 8px;
+}
+
+#gender label:not(:last-child)
+{
+	margin-right: 15px;
+}
+
+.fa-venus-mars
+{
+	font: 1.3em;
 }

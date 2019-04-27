@@ -1,14 +1,10 @@
 <div id="info" class="clearfix">
 	<div id="profile-img">
-		<img src="{{profileImg}}" alt="" class="rounded" data-number="0"><br>
+		<div class="clearfix"><img src="{{profileImg}}" alt="" class="rounded" data-number="0"></div>
 		<i class="fas fa-pen-square"></i>Edit<br><br><br>
-		<div class="img clearfix"><img alt="" src="img/face1.jpg" data-number="1"></div>
-		<div class="img clearfix"><img alt="" src="img/face3.jpg" data-number="2"></div>
-		<div class="img clearfix"><img alt="" src="img/face5.jpg" data-number="3"></div>
-		<div class="img clearfix"><img alt="" src="img/face4.jpg" data-number="4"></div>
 	</div>
 	<div id="about">
-		<h2><input type="text" value="{{user.username}}" name="username">, 21</h2>
+		<h2><input type="text" value="{{user.username}}" name="username"></h2>
 		<strong>Cape Town, South Africa</strong>
 
 		<h2>About Me:</h2>
@@ -22,6 +18,10 @@
 			<tr>
 				<td>Surname:</td>
 				<td><input type="text" name="lastname" value="{{user.lastname}}"></td>
+			</tr>
+			<tr>
+				<td>Age:</td>
+				<td>{{user.age}} years old</td>
 			</tr>
 			<tr>
 				<td>Email Address:</td>

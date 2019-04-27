@@ -3,8 +3,8 @@ const nodemailer = require('nodemailer');
 const credentials = {
 	service: 'Gmail',
 	auth: {
-		user: '',
-		pass: ''
+		user: 'benybodipo@gmail.com',
+		pass: 'Vainilla'
 	},
 	tls: {
 		rejectUnauthorized: false

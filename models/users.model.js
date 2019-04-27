@@ -39,6 +39,10 @@ var usersSchema = new mongoose.Schema({
 	 {
 		 type: Date
 	 },
+	 age:
+	 {
+		 type: Number
+	 },
 	 bio:
 	 {
 		 type: String

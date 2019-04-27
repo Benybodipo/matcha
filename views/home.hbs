@@ -1,15 +1,6 @@
 {{#each users}}
 	<div class="user">
-		{{#unless images.length}}
-			{{#if gender}}
-				<img src="img/male.png" alt="">
-			{{else}}
-				<img src="img/female.jpeg" alt="">
-			{{/if}}
-		{{else}}
-			<img src="{{images}}" alt="">
-		{{/unless}}
-
+		<img src="{{images}}" alt="">
 		<strong></strong>
 		<div class="status">
 			<span class="online"></span>

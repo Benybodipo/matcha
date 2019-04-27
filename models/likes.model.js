@@ -13,10 +13,14 @@ var likesSchema = new mongoose.Schema({
         type: Schema.ObjectId,
         required: true
     },
+	match: {
+		type: Number,
+		default: 0
+	},
     timestamp:
-	 {
+	{
         type: Date,
-		  default: Date.now
+		default: Date.now
     }
 
 });

@@ -6,11 +6,19 @@ const Preferences = require('../models/preferences.model');
 
 module.exports = function(req, res)
 {
+	var page = req.url.split("/").filter(function(item) { return item !== "";})[0];
+	var searchParams = req.query;
+
 	var content = {
 		title: "Matcha | Welcome",
 		css: ["chat"],
-		js: ["search"]
+		js: ["search"],
+		isHome: (page == "home") ? true : false
 	};
+
+	console.log(searchParams);
+	
+
 
 	Users.find({}, function(err, users){
 		if (err) throw err;

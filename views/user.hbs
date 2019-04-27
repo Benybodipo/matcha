@@ -2,33 +2,22 @@
 	<div id="profile-img">
 		{{#unless user.images.length}}
 			{{#if gender}}
-				<img src="img/male.png" alt=""><br>
+				<img src="/img/male.png" alt=""><br>
 			{{else}}
-				<img src="img/female.jpeg" alt=""><br>
+				<img src="/img/female.jpeg" alt=""><br>
 			{{/if}}
 		{{else}}
 			<img src="{{user.images}}" alt=""><br>
 		{{/unless}}
-		<div class="star">
-			<i class="fas fa-star"></i>
-			<i class="fas fa-star"></i>
-			<i class="fas fa-star"></i>
-			<i class="far fa-star"></i>
-			<i class="far fa-star"></i>
-		</div><br><br><br>
-		<div class="img clearfix"><img alt="" src="img/face1.jpg"></div>
-		<div class="img clearfix"><img alt="" src="img/face3.jpg"></div>
-		<div class="img clearfix"><img alt="" src="img/face5.jpg"></div>
-		<div class="img clearfix"><img alt="" src="img/face2.jpg"></div>
+		<div class="star"><i class="{{like}}"></i></div><br>
 	</div>
 	<div id="about">
-		<h2>{{user.username}}, <span class="age"></span></h2>
+		<h2>{{user.username}}</h2>
 		<strong>3km away</strong><br>
 		<strong>Cape Town, South Africa</strong>
 
 		<h2>Biography</h2>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, a! Eius distinctio modi, incidunt nam ex aut provident dicta ducimus!</p>
-		<p>Facere praesentium commodi natus autem repellat, maxime suscipit vitae blanditiis quisquam soluta, eos quia est earum consequatur laborum, reprehenderit aliquam.</p>
+		<p>{{user.bio}}</p>
 
 		<h2>Info: </h2>
 		<table>
@@ -39,6 +28,10 @@
 			<tr>
 				<td>Surname:</td>
 				<td>{{user.lastname}}</td>
+			</tr>
+			<tr>
+				<td>Age:</td>
+				<td>{{user.age}} years old</td>
 			</tr>
 			<tr>
 				<td>I am looking for:</td>

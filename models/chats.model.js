@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-var messagesSchema = new mongoose.Schema({
+var chatsSchema = new mongoose.Schema({
 
     sender:
-	 {
+	{
         type: Schema.ObjectId,
         required: true
     },
@@ -13,16 +13,6 @@ var messagesSchema = new mongoose.Schema({
         type: Schema.ObjectId,
         required: true
     },
-	message:
-	{
-		type: String,
-		required: true
-	},
-	read:
-	{
-		type: Boolean,
-		default: false
-	},
     timestamp:
 	{
         type: Date,
@@ -31,4 +21,4 @@ var messagesSchema = new mongoose.Schema({
 
 });
 
-module.exports = mongoose.model('Messages', messagesSchema);
+module.exports = mongoose.model('Chats', chatsSchema);

@@ -16,7 +16,13 @@ module.exports = function() {
 				bcrypt.compare(password, user.password, function(err, isMatch){
 					if (err) throw err;
 					if (isMatch)
-						return done(null, user);
+					{
+						Users.updateOne({_id: user._id}, {age: getAge(user.birthday)}, function(err, result){
+							if (err) throw err;
+							return done(null, user);
+						})
+
+					}
 					else
 						return done(null, false, { message: 'wrong password my broer'});
 				});
@@ -34,3 +40,11 @@ passport.deserializeUser(function(id, done) {
 		done(err, user);
 	});
 });
+
+function getAge(birthday)
+{
+	console.log();
+	var ageDifMs = Date.now() - birthday.getTime();
+	var ageDate = new Date(ageDifMs);
+	return Math.abs(ageDate.getUTCFullYear() - 1970);
+}

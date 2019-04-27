@@ -1,5 +1,6 @@
 const Users 		= require('../models/users.model');
 const Visits 		= require('../models/visits.model');
+const Likes 		= require('../models/likes.model');
 const Notifications = require('../models/notifications.model');
 const mongoose 		= require('mongoose');
 
@@ -14,9 +15,20 @@ module.exports = function(req, res)
 
 	Users.findOne({_id: id}, function(err, user){
 		if (err) throw err;
+		var orStatement = [{userId1: id, userId2: req.user._id}, {userId2: id, userId1: req.user._id, match: 1}];
 
-		content.user = user;
-		res.render('user', content);
+		Likes.findOne({$or: orStatement}, function(err, likes){
+			if (err) throw err;
+
+			content.user = user;
+			if (likes && ((likes.userId1.toString() == req.user._id.toString()) || (likes.userId2.toString() == req.user._id.toString())))
+				content.like = "fas fa-star";
+			else
+				content.like = "far fa-star";
+
+			res.render('user', content);
+		});
+
 	});
 
 	Visits.findOne({userId: id, visitorId: req.user._id.toString()}, function(err, visitors){
@@ -33,6 +45,8 @@ module.exports = function(req, res)
 
 				var newNotification = new Notifications({
 					userId: mongoose.Types.ObjectId(id),
+					userId2: req.user._id,
+					type: 1,
 					message: message,
 					link: link
 				});

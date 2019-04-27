@@ -8,6 +8,11 @@ var notificationsSchema = new mongoose.Schema({
 		type: Schema.Types.ObjectId,
 		required: true
 	},
+	userId2:
+	{
+		type: Schema.Types.ObjectId,
+		required: true
+	},
     message:
 	{
         type: Object,
@@ -18,6 +23,11 @@ var notificationsSchema = new mongoose.Schema({
         type: Object,
         required: true
     },
+	type:
+	{
+		type: Number,
+        required: true
+	},
 	status:
 	{
 		type: Number,

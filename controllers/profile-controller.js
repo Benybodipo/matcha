@@ -14,7 +14,7 @@ module.exports = function(req, res)
 			js: ["profile"],
 			user: req.user,
 			preferences:req.user.preferences,
-			profileImg: (req.user.images.length) ? req.user.images[0] : defaultProfileImg
+			profileImg: req.user.images[0]
 		};
 		content.sex = {
 			men: (req.user.preferences.gender == 1) ? "checked" : "",

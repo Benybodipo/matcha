@@ -25,3 +25,9 @@
 {
 	border-radius: 50% !important;
 }
+
+
+#info #profile-img .star i
+{
+	font-size: 2em;
+}

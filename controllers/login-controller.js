@@ -40,7 +40,8 @@ module.exports = function(req, res)
 								ages: [18, 50]
 							};
 
-							Users.update({_id: req.params.id}, {preferences: preferences}, function(err, res){
+							var defaultImg = (user.gender == "male") ? "/img/male.png" : "/img/female.jpeg";
+							Users.update({_id: req.params.id}, {preferences: preferences, "images.0": defaultImg }, function(err, res){
 								if (err) throw err;
 								console.log(res);
 							});

@@ -63,6 +63,7 @@ var indexController = require('./controllers/index-controller'),
 	loginController = require('./controllers/login-controller'),
 	homeController = require('./controllers/home-controller'),
 	userController = require('./controllers/user-controller'),
+	likeController = require('./controllers/likes-controller'),
 	profileController = require('./controllers/profile-controller'),
 	inboxController = require('./controllers/inbox-controller');
 
@@ -77,13 +78,15 @@ app.get("/login/:username/:id/:token/:type", loginController);
 app.get("/user/:id", authenticationMiddleware(), userController);
 app.get("/home", authenticationMiddleware(), homeController);
 app.get("/profile", authenticationMiddleware(), profileController);
-app.get("/inbox", authenticationMiddleware(), inboxController);
+app.get("/inbox", authenticationMiddleware(), inboxController.page);
+app.get("/inbox/:receiver", authenticationMiddleware(), inboxController.getMessages);
 app.get("/notifications", authenticationMiddleware(), function(req, res){
 	Notifications.find({userId: req.user._id, status: 0}, function(err, notifications){
 		if (err) throw err;
 		res.send(notifications);
 	});
 });
+
 
 app.get("/logout", authenticationMiddleware(), function(req, res){
 	req.logout();
@@ -99,7 +102,9 @@ app.post("/login", passport.authenticate('local', {
 	successRedirect: '/home',
 	failureRedirect: '/login'
 }));
+app.post("/inbox", inboxController.chat)
 app.post('/profile', users.profile);
+app.post("/likes", likeController.like);
 
 
 function authenticationMiddleware()
